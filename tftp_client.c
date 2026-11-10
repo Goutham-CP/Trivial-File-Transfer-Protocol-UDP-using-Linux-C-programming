@@ -167,8 +167,10 @@ int main() {
             case 4:
              if(client.sockfd >= 0)
             {
+             printf("Disconected Successfully\n");
              close(client.sockfd);
             }
+              printf("Exited Successfully\n");
               exit(0);
               break;
             default:
