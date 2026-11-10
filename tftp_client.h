@@ -19,6 +19,11 @@ void process_command(tftp_client_t *client, char *command);
 void send_request(int sockfd, struct sockaddr_in server_addr, char *filename, int opcode);
 void receive_request(int sockfd, struct sockaddr_in server_addr, char *filename, int opcode);
 
-int validate_netascii_file(const char *filename);
 
+
+void PUTFile_NetASCII(int sockfd,struct sockaddr_in client,socklen_t client_len, char *filename);
+void GETFile_NetASCII(int sockfd,struct sockaddr_in client,socklen_t client_len, char *filename);
+
+
+int netascii_decode(const char *in, int in_len, char *out, int fd);
 #endif
