@@ -122,7 +122,6 @@ int main() {
         printf("3.GET\n");
         printf("4.Exit\n");
         printf("Enter the choice   ");
-       getchar();
        getline(&choicestr,&len,stdin);
        choicestr[strcspn(choicestr, "\n")] = '\0';
         //scanf("%d",&choice);
@@ -147,6 +146,7 @@ int main() {
     // Strip trailing newline if present
            filename[strcspn(filename, "\n")] = '\0';
             put_file(&client , filename);
+            getchar();
             break;
             case 3:{
               char *filename = NULL;
@@ -160,10 +160,15 @@ int main() {
     // Strip trailing newline if present
            filename[strcspn(filename, "\n")] = '\0';
             get_file(&client , filename);
+            getchar();
             break;
           }
 
             case 4:
+             if(client.sockfd >= 0)
+            {
+             close(client.sockfd);
+            }
               exit(0);
               break;
             default:
@@ -172,12 +177,7 @@ int main() {
         }
 
     }while (choice !=4);
-
-
-
-
-
-
+    
     return 0;
 }
 
@@ -786,6 +786,7 @@ void put_file(tftp_client_t *client, char *filename) {
         int res = validate_netascii_file(filename);
        if(res==0){
         printf("Invalid Filename : should be .txt\n");
+        return;
        }
 
           PUTFile_NetASCII(client, filename);
@@ -918,6 +919,7 @@ void get_file(tftp_client_t *client, char *filename) {
        int res = validate_netascii_file(filename);
        if(res==0){
         printf("Invalid Filename : should be .txt\n");
+        return;
        }
 
       GETFile_NetASCII(client,filename);
