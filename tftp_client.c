@@ -122,7 +122,7 @@ int main() {
         printf("3.GET\n");
         printf("4.Exit\n");
         printf("Enter the choice   ");
-
+       getchar();
        getline(&choicestr,&len,stdin);
        choicestr[strcspn(choicestr, "\n")] = '\0';
         //scanf("%d",&choice);
